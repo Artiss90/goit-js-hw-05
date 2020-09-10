@@ -13,6 +13,9 @@ class User {
     this.followers = followers;
   }
 }
+User.prototype.getInfo = function (name, age, followers) {
+  return `User ${this.name} is ${this.age} years old and has ${this.followers} followers`;
+};
 
 console.log(typeof User);
 // 'function'

@@ -126,16 +126,35 @@ class Car {
     this._price = price;
   }
   get price() {
-    this._price;
+    return this._price;
   }
   set price(value) {
     this._price = value;
   }
-  turnOn() {}
-  turnOff() {}
-  accelerate(value) {}
-  decelerate(value) {}
-  drive(hours) {}
+  turnOn() {
+    this.isOn = true;
+  }
+  turnOff() {
+    this.isOn = false;
+    this.speed = 0;
+  }
+  accelerate(value) {
+    if (this.speed + value <= this.maxSpeed) {
+      return (this.speed += value);
+    }
+    return (this.speed = this.maxSpeed);
+  }
+  decelerate(value) {
+    if (this.speed - value >= 0) {
+      return (this.speed -= value);
+    }
+    return (this.speed = 0);
+  }
+  drive(hours) {
+    if (this.isOn === true) {
+      return (this.distance += hours * this.speed);
+    }
+  }
 }
 // ........................................................................
 
@@ -147,9 +166,9 @@ mustang.drive(2);
 console.log(Car.getSpecs(mustang));
 // 'maxSpeed: 200, speed: 50, isOn: true, distance: 100, price: 2000'
 
-// mustang.decelerate(20);
-// mustang.drive(1);
-// mustang.turnOff();
+mustang.decelerate(20);
+mustang.drive(1);
+mustang.turnOff();
 
 console.log(Car.getSpecs(mustang));
 // 'maxSpeed: 200, speed: 0, isOn: false, distance: 130, price: 2000'
